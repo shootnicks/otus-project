@@ -1,0 +1,46 @@
+################################################################################
+# Apache2 Compose
+################################################################################
+# docker compose -f docker-compose-Apache2.yml up -d
+################################################################################
+#version: "3.5"
+
+services:
+
+  apache2-1:
+    container_name: apache2-1
+    image: httpd:latest
+    restart: always
+    networks:
+      - default
+    ports:
+      - "81:80"
+    volumes:
+      - /opt/otus-project/apache2/apache2-1/index.html:/usr/local/apache2/htdocs/index.html
+
+  apache2-2:
+    container_name: apache2-2
+    image: httpd:latest
+    restart: always
+    networks:
+      - default
+    ports:
+      - "82:80"
+    volumes:
+      - /opt/otus-project/apache2/apache2-2/index.html:/usr/local/apache2/htdocs/index.html
+
+  apache2-3:
+    container_name: apache2-3
+    image: httpd:latest
+    restart: always
+    networks:
+      - default
+    ports:
+      - "83:80"
+    volumes:
+      - /opt/otus-project/apache2/apache2-3/index.html:/usr/local/apache2/htdocs/index.html
+
+networks:
+  default:
+    external: true
+    name: otus-net
