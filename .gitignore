@@ -1,1 +1,4 @@
-/nginx/log/*
+nginx/log/*
+mysql/mysql-source/data/*
+mysql/mysql-replica/data/*
+

@@ -1,6 +1,9 @@
 # otus-project
 
 
+## Основная инструкция
+
+
 Переходим в папку /opt
 
     cd /opt
@@ -28,26 +31,31 @@
     docker compose -f docker-compose-Apache2.yml up -d
 
 
+Запускаем контейнер c MySQL
 
 
+    docker compose -f docker-compose-MySQL.yml up -d
 
 
-Заходим в него
-
-    docker exec -it smarthomeNode-red bash
+Запускаем контейнер c Zabbix
 
 
-Устанавливаем пакеты для узлов
-
-    cd /data
-    npm install --unsafe-perm --no-update-notifier --no-fund --only=production
+    docker compose -f docker-compose-Zabbix.yml up -d
 
 
-Выходим из запущенного контейнера
-
-    exit
+## Дополнительные команды
 
 
-Перезапускам контейнер
+Зайти в контейнер
 
-    docker-compose -f docker-compose-Node-red.yml restart
+    docker exec -it Nginx bash
+
+
+Перезапустить контейнер
+
+    docker-compose -f docker-compose-Nginx.yml restart
+
+
+Посмотреть логи программы работающей в контейнере (работает не со всеми контейнерами)
+
+    docker logs zabbix-server

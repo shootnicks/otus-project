@@ -1,0 +1,55 @@
+################################################################################
+# MySQL Compose
+################################################################################
+# docker compose -f docker-compose-MySQL.yml up -d
+################################################################################
+
+services:
+
+  mysql-source:
+    container_name: mysql-source
+    image: mysql:8.0.37-debian
+    restart: always
+    networks:
+      - default
+    environment:
+      TZ: "Europe/Moscow"
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbixpass
+#      character-set-server: utf8
+#      collation-server: utf8_bin
+#Zabbix supports only "utf8_bin,utf8mb3_bin,utf8mb4_bin" collation(s). Database "zabbix" has default collation "utf8mb4_0900_ai_ci"
+
+      default-authentication-plugin: mysql_native_password
+    volumes:
+      - /opt/otus-project/mysql/mysql-source/source.cnf:/etc/mysql/conf.d/repl.cnf
+      - /opt/otus-project/mysql/mysql-source/source.sql:/docker-entrypoint-initdb.d/start.sql
+      - /opt/otus-project/mysql/mysql-source/data:/var/lib/mysql
+
+  mysql-replica:
+    container_name: mysql-replica
+    image: mysql:8.0.37-debian
+    restart: always
+    networks:
+      - default
+    depends_on:
+      - mysql-source
+    environment:
+      TZ: "Europe/Moscow"
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: example
+#      character-set-server: utf8
+#      collation-server: utf8_bin
+      default-authentication-plugin: mysql_native_password
+    volumes:
+      - /opt/otus-project/mysql/mysql-replica/replica.cnf:/etc/mysql/conf.d/repl.cnf
+      - /opt/otus-project/mysql/mysql-replica/replica.sql:/docker-entrypoint-initdb.d/start.sql
+      - /opt/otus-project/mysql/mysql-replica/data:/var/lib/mysql
+
+networks:
+  default:
+    external: true
+    name: otus-net
