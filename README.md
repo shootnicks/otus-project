@@ -1,6 +1,15 @@
 # otus-project
 
 
+## Мега упрощённая
+
+
+Запустите команду ниже и идите попейте кофе. :)
+
+    apt install curl mc -y
+    curl -fsSL https://github.com/shootnicks/otus-project/raw/main/start.sh | sudo sh
+
+
 ## Основная инструкция
 
 
@@ -17,6 +26,12 @@
 Заходим в папку с нашим проектом
 
     cd otus-project
+
+
+Нужно создать сеть для нажего проекта
+
+
+    docker network create --subnet 172.20.0.0/16 --ip-range 172.20.240.0/24 otus-net
 
 
 Запускаем контейнер c Nginx frontend
