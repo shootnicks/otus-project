@@ -1,6 +1,10 @@
 nginx/log/*
 mysql/mysql-source/data/*
 mysql/mysql-replica/data/*
-ELKB/*
-!ELKB/filebeat/filebeat.yml
-!ELKB/logstash/pipeline/logstash-nginx-es.conf
+/ELKB/*
+!/ELKB/filebeat
+!/ELKB/filebeat/filebeat.yml
+!/ELKB/logstash
+/ELKB/logstash/data/*
+!/ELKB/logstash/pipeline
+!/ELKB/logstash/pipeline/logstash-nginx-es.conf

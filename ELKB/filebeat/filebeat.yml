@@ -1,0 +1,12 @@
+filebeat.inputs:
+- type: filestream
+  paths:
+    - /host/var/log/*.log
+
+  enabled: true
+  exclude_files: ['.gz$']
+  prospector.scanner.exclude_files: ['.gz$']
+
+output.logstash:
+  hosts: ["logstash:5044"]
+
