@@ -4,16 +4,18 @@ cd /opt
 #echo "Install Docker"
 #echo "---"
 curl -fsSL https://get.docker.com | sudo sh
-#echo "---"
-#echo "Settings vars"
-#echo "---"
-#git config --global user.email "pg.andriyanov@gmail.com";
-#git config --global user.name "Andriyanov Pavel";
+
+
+
+cd /opt
 echo "---"
 echo "Clone project from Github"
 echo "---"
-git clone git@github.com:shootnicks/otus-project.git
+git clone https://github.com/shootnicks/otus-project.git
 cd /opt/otus-project
+
+
+
 echo "---"
 echo "Set ip in file docker-compose-4-ELKB.yml"
 echo "---"
@@ -23,6 +25,9 @@ echo "---"
 echo 'Creating network "otus-net"'
 echo "---"
 docker network create --subnet 172.20.0.0/16 --ip-range 172.20.240.0/24 otus-net;
+
+
+
 echo "---"
 echo "Load docker images"
 echo "---"
@@ -50,26 +55,53 @@ rm docker_images/ELKB/kibana.8.13.4.tar;
 docker load -i docker_images/ELKB/filebeat.8.13.4.tar;
 rm docker_images/ELKB/filebeat.8.13.4.tar;
 rm -r docker_images;
+
+
+
 echo "---"
 echo "Starting Apache2"
 echo "---"
 docker compose -f docker-compose-1-Apache2.yml up -d;
+
+
+
 echo "---"
 echo "Starting MySQL"
 echo "---"
 docker compose -f docker-compose-2-MySQL.yml up -d;
+
+
+
 echo "---"
 echo "Starting Zabbix"
 echo "---"
-docker compose -f docker-compose-3-Zabbix.yml -d;
+docker compose -f docker-compose-3-Zabbix.yml up -d;
+docker exec -it mysql-source bash
+mysql -uroot -pexample
+use zabbix;
+UPDATE interface SET dns = 'zabbix-agent' WHERE hostid = 10084;
+UPDATE interface SET useip = '0' WHERE hostid = 10084;
+exit;
+exit
+
+
+
+
 echo "---"
 echo "Starting ELKB"
 echo "---"
-docker compose -f docker-compose-4-ELKB.yml -d;
+mkdir /opt/otus-project/ELKB/elasticsearch/;
+mkdir /opt/otus-project/ELKB/elasticsearch/data/;
+mkdir /opt/otus-project/ELKB/kibana/;
+mkdir /opt/otus-project/ELKB/certs/;
+docker compose -f docker-compose-4-ELKB.yml up -d;
+
+
+
 echo "---"
 echo "Starting Nginx"
 echo "---"
-docker compose -f docker-compose-5-Nginx.yml -d;
+docker compose -f docker-compose-5-Nginx.yml up -d;
 echo "---"
 echo "Congratulations! Everything is running!"
 echo "---"
