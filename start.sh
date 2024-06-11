@@ -1,39 +1,39 @@
 #!/bin/bash
 cd /opt
-#echo "---"
-#echo "Install Docker"
-#echo "---"
+echo "\e[1;33m---"
+echo "Install Docker"
+echo "---\e[1;m"
 curl -fsSL https://get.docker.com | sudo sh
 
 
 
 cd /opt
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Clone project from Github"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 git clone https://github.com/shootnicks/otus-project.git
 cd /opt/otus-project
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Set IP in file docker-compose-4-ELKB.yml"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 host_ip=$(hostname -I | awk '{print $1}');
 sed -i "s/host_ip/${host_ip}/g" /opt/otus-project/docker-compose-4-ELKB.yml;
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo 'Creating network "otus-net"'
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 docker network create --subnet 172.20.0.0/16 --ip-range 172.20.240.0/24 otus-net;
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Load docker images"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 #curl -o docker_images.zip -L "https://hosting.n-dbc.ru/s/Eo9K3dQGmm9gWER/download";
 #unzip docker_images.zip -d /opt/otus-project/docker_images;
 #rm docker_images.zip;
@@ -64,30 +64,30 @@ rm -r docker_images;
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Starting Apache2"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 docker compose -f docker-compose-1-Apache2.yml up -d;
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Starting MySQL"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 docker compose -f docker-compose-2-MySQL.yml up -d;
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Starting Zabbix"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 docker compose -f docker-compose-3-Zabbix.yml up -d;
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Starting ELKB"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 mkdir /opt/otus-project/ELKB/elasticsearch/;
 mkdir /opt/otus-project/ELKB/elasticsearch/data/;
 mkdir /opt/otus-project/ELKB/kibana/;
@@ -96,13 +96,13 @@ docker compose -f docker-compose-4-ELKB.yml up -d;
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Starting Nginx"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
 docker compose -f docker-compose-5-Nginx.yml up -d;
 
 
 
-echo -e "\e[1;33m---"
+echo "\e[1;33m---"
 echo "Congratulations! Everything is running!"
-echo -e "---\e[1;m"
+echo "---\e[1;m"
