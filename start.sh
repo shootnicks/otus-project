@@ -93,6 +93,13 @@ docker compose -f docker-compose-5-Nginx.yml up -d;
 
 
 
-echo "\e[1;33m---"
+echo "\e[1;32m---"
 echo "Congratulations! Everything is running!"
 echo "---\e[1;m"
+
+
+
+echo -e "\e[1;35mPlease add the CA certificate to your computer.:"
+echo -e ""
+cat /opt/otus-project/ELKB/certs/ca/ca.crt
+echo -e "\e[1;m"
