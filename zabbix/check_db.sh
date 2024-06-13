@@ -39,7 +39,7 @@ while true; do
         echo "СУБД инициализирована."
         break
     else
-        update_line "Идёт инициализация СУБД$i"
+        update_line "test$i"
         sleep $CHECK_INTERVAL
 	i=$i".";
 	if [ ${#i} -eq 4 ]; then
