@@ -64,8 +64,15 @@ docker compose -f docker-compose-1-Apache2.yml up -d;
 echo "\e[1;33m---"
 echo "Starting MySQL"
 echo "---\e[1;m"
-mkdir /opt/otus-project/mysql/mysql-source/scripts;
+#mkdir /opt/otus-project/mysql/mysql-source/scripts;
 docker compose -f docker-compose-2-MySQL.yml up -d;
+
+
+
+echo "\e[1;33m---"
+echo "Check DB"
+echo "---\e[1;m"
+./zabbix/check_db.sh
 
 
 

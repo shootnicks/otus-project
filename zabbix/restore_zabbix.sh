@@ -38,8 +38,8 @@ mkdir -p $Work_dir/tempo_for_restore;
 # Распаковываем файлы дампа из последнего сделанного бэкапа.
 tar -xf $Work_dir/backup_zabbix/$last_backup_file -C $Work_dir/tempo_for_restore/;
 
-# Создаём базу данных.
-echo "CREATE DATABASE $DbName;" | docker exec -e MYSQL_PWD=$Password -i $Container /usr/bin/mysql -u $User
+## Создаём базу данных.
+#echo "CREATE DATABASE $DbName;" | docker exec -e MYSQL_PWD=$Password -i $Container /usr/bin/mysql -u $User
 
 # Перебор всех файлов во всех вложенных папках
 find "$Work_dir/tempo_for_restore" -type f | while read -r file; do
