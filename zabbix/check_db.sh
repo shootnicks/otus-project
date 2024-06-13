@@ -13,8 +13,8 @@ check_docker_logs() {
 
 # Функция для обновления строки на экране
 update_line() {
-    local message="$1"
-    echo -ne "\r\033[K$message"
+    local message=$1
+    echo -ne "\r$message"
 }
 
 # Функция для скрытия курсора
@@ -39,7 +39,7 @@ while true; do
         echo "СУБД инициализирована."
         break
     else
-        update_line "test$i"
+        update_line "Идёт инициализация СУБД$i"
         sleep $CHECK_INTERVAL
 	i=$i".";
 	if [ ${#i} -eq 4 ]; then
