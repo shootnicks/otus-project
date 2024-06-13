@@ -114,7 +114,7 @@ echo "---\e[1;m"
 
 
 
-echo -e "\e[1;35mPlease add the CA certificate to your computer.:"
-echo -e ""
+echo "\e[1;35mPlease add the CA certificate to your computer.:"
+echo ""
 cat /opt/otus-project/ELKB/certs/ca/ca.crt
-echo -e "\e[1;m"
+echo "\e[1;m"

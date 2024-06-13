@@ -14,12 +14,14 @@ check_docker_logs() {
 # Функция для обновления строки на экране
 update_line() {
     local message="$1"
-    echo -ne "\r\033[K$message"
+#    echo -ne "\r\033[K$message"
+    echo "\r\033[K$message"
 }
 
 # Функция для скрытия курсора
 hide_cursor() {
-    echo -ne "\e[?25l"
+#    echo -ne "\e[?25l"
+    echo "\e[?25l"
 }
 
 # Функция для отображения курсора
