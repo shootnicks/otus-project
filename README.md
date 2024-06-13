@@ -1,6 +1,16 @@
 # otus-project
 
 
+## Мега упрощённая (короткая)
+
+
+Запустите команду ниже и идите попейте кофе. :)
+
+    apt install curl mc nfs-common -y
+    curl -fsSL https://github.com/shootnicks/otus-project/raw/main/short_start.sh | sudo sh
+
+
+
 ## Мега упрощённая
 
 
@@ -8,6 +18,7 @@
 
     apt install curl mc nfs-common -y
     curl -fsSL https://github.com/shootnicks/otus-project/raw/main/start.sh | sudo sh
+
 
 
 ## Основная инструкция
