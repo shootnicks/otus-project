@@ -4,10 +4,9 @@ Container=mysql-replica;
 DbName=zabbix;
 User=root;
 Password=example;
-#export MYSQL_PWD=example;
-#export MYSQL_PWD=$Password;
 DATE=`date +"%Y-%m-%d_%Hh-%Mm"`;
-DIR=tempo_backup_$DbName"_"$DATE;
+Work_dir=/opt/otus-project/zabbix
+DIR=$Work_dir/tempo_backup_$DbName"_"$DATE;
 FILE=backup_$DbName"_"$DATE".tar.gz"
 
 mkdir $DIR;

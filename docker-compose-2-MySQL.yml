@@ -28,6 +28,7 @@ services:
       - /opt/otus-project/mysql/mysql-source/source.cnf:/etc/mysql/conf.d/repl.cnf
       - /opt/otus-project/mysql/mysql-source/source.sql:/docker-entrypoint-initdb.d/start.sql
       - /opt/otus-project/mysql/mysql-source/data:/var/lib/mysql
+#      - /opt/otus-project/mysql/mysql-source/scripts:/mnt/scripts
 
   mysql-replica:
     container_name: mysql-replica
