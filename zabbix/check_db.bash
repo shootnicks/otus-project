@@ -7,29 +7,30 @@ CHECK_INTERVAL=3
 
 # Функция для проверки логов Docker
 check_docker_logs() {
-        docker logs "$Container" 2>&1 | grep -q "$SEARCH_STRING"
+	docker logs "$Container" 2>&1 | grep -q "$SEARCH_STRING"
     return $?
 }
 
 # Функция для обновления строки на экране
 update_line() {
     local message=$1
-    printf "\r%s" "$message"
+    echo -ne "\r$message"
 }
 
 # Функция для скрытия курсора
 hide_cursor() {
-    echo "\e[?25l"
+    echo -ne "\e[?25l"
 }
 
 # Функция для отображения курсора
 show_cursor() {
-    echo "\e[?25h"
+    echo -ne "\e[?25h"
 }
 
 hide_cursor
 
 i=""
+
 
 # Основной цикл проверки
 while true; do
@@ -41,6 +42,9 @@ while true; do
     else
         update_line "Идёт инициализация СУБД$i"
         sleep $CHECK_INTERVAL
-        i=$i".";
+	i=$i".";
+	if [ ${#i} -eq 4 ]; then
+		i=""
+	fi
     fi
 done
