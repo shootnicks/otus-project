@@ -55,7 +55,7 @@ check_docker_logs() {
 # Функция для обновления строки на экране
 update_line() {
     local message=$1
-    echo -ne "\r$message"
+    printf "\r%s" "$message"
 }
 # Функция для скрытия курсора
 hide_cursor() {
